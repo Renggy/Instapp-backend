@@ -26,4 +26,5 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(fn (ValidationException       $e) => ApiResponse::validation($e->errors()));
         $exceptions->render(fn (AuthenticationException   $e) => ApiResponse::unauthorized());
         $exceptions->render(fn (AccessDeniedHttpException $e) => ApiResponse::forbidden());
+        $exceptions->render(fn (Throwable                 $e) => ApiResponse::error($e->getMessage()));
     })->create();
